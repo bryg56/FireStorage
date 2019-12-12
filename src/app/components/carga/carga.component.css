@@ -1,0 +1,24 @@
+#dropI {
+    /* width: 900px;
+    height: 400px; */
+}
+
+.drop-zone {
+    border: dotted 3px lightpink;
+    opacity: 0.5;
+    color: #666;
+    text-align: center;
+}
+
+.file-over {
+    border: dotted 3px dodgerblue
+}
+
+.table {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.text-green {
+    color: green;
+}
