@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carga.component.css']
 })
 export class CargaComponent implements OnInit {
-
+  public onElement:boolean=false;
   constructor() { }
 
   ngOnInit() {
