@@ -1,5 +1,6 @@
-import { Directive, HostListener, Output,EventEmitter } from '@angular/core';
+import { Directive, HostListener, Output,EventEmitter, Input } from '@angular/core';
 import { TouchSequence } from 'selenium-webdriver';
+import { FileItem } from '../models/file.item';
 // import { EventEmitter } from 'events';
 
 @Directive({
@@ -7,7 +8,7 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class NgDropFilesDirective {
 
-
+  @Input() archivosUpload:Array<FileItem> =[];
 
   constructor() { }
   @Output()mouseOnElement:EventEmitter<boolean>=new EventEmitter();
@@ -27,12 +28,21 @@ export class NgDropFilesDirective {
   public onDrop(event){
     const fileTransfer=event.dataTransfer;
     console.log(fileTransfer);
-    this._extraerArchivo(fileTransfer);
+    this._extraerArchivo(fileTransfer.files);
     this._prevenirDefault(event);
 
   }
   private _extraerArchivo(archivoLista:FileList){
-    console.log(archivoLista.item)
+    console.log(archivoLista)
+    console.log(Object.getOwnPropertyNames(archivoLista));
+    for(const propiedad in Object.getOwnPropertyNames(archivoLista)){
+      console.log(propiedad);
+      const archivoTemporal:File=archivoLista[propiedad];
+      const nuevoArchivo=new FileItem(archivoTemporal);
+      this.archivosUpload.push(nuevoArchivo);
+      console.log(this.archivosUpload);
+
+    }
   }
   private _prevenirDefault(event:Event){
     event.preventDefault();
